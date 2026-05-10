@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Anneler Günü 💜</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial;
+  background: linear-gradient(135deg, #f3e8ff, #fff5ff);
+  text-align: center;
+  color: #4b2a5a;
+  overflow-x: hidden;
+}
+
+/* intro */
+#intro {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #a855f7, #f3e8ff);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  cursor: pointer;
+}
+
+#intro h2 {
+  color: white;
+}
+
+#bigHeart {
+  font-size: 120px;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0% {transform: scale(1);}
+  50% {transform: scale(1.4);}
+  100% {transform: scale(1);}
+}
+
+/* başlık */
+h1 {
+  margin-top: 20px;
+  color: #a855f7;
+  animation: glow 2s infinite alternate;
+  text-shadow: 0 0 10px #c084fc;
+}
+
+@keyframes glow {
+  from {text-shadow: 0 0 5px #c084fc;}
+  to {text-shadow: 0 0 20px #a855f7;}
+}
+
+/* kart */
+.card {
+  background: white;
+  width: 90%;
+  max-width: 500px;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+img {
+  width: 100%;
+  border-radius: 15px;
+}
+
+/* yazı */
+#text {
+  margin-top: 15px;
+  white-space: pre-wrap;
+}
+
+/* kalp patlama */
+.boom {
+  position: fixed;
+  font-size: 25px;
+  animation: boom 0.8s ease-out forwards;
+  pointer-events: none;
+}
+
+@keyframes boom {
+  0% {transform: scale(0); opacity: 1;}
+  100% {transform: scale(3) translateY(-100px); opacity: 0;}
+}
+
+/* uçan kalpler */
+.heart {
+  position: fixed;
+  font-size: 20px;
+  animation: float 2s linear forwards;
+}
+
+@keyframes float {
+  0% {transform: translateY(0); opacity: 1;}
+  100% {transform: translateY(-200px); opacity: 0;}
+}
+</style>
+</head>
+
+<body>
+
+<div id="intro">
+  <div id="bigHeart">💜</div>
+  <h2>Tıkla ve aç</h2>
+</div>
+
+<h1>💜 Anneler Günün Kutlu Olsun 💜</h1>
+<div>🌸🌷💜🌺🌸</div>
+
+<div class="card">
+  <img src="https://i.hizliresim.com/n0ijnu6.jpeg">
+  <p id="text"></p>
+</div>
+
+<audio id="music" loop>
+  <source src="https://www.image2url.com/r2/default/audio/1778369431868-5d830723-2818-4656-aafe-1792a249db4d.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const text = `hayat bazen bize kan bağı olmadan en güzel bağları kurduruyor... sen benim için sadece bir abla değil, zor anımda sığındığım, mutlu anımda ilk paylaşmak istediğim insansın. varlığın bana hep güç veriyor, iyi ki hayatımdasın. senin yerin bende çok başka, çok özel... anneler günün kutlu olsun balımmm 💜`;
+
+let i = 0;
+function type() {
+  if (i < text.length) {
+    document.getElementById("text").innerHTML += text[i];
+    i++;
+    setTimeout(type, 40);
+  }
+}
+
+const music = document.getElementById("music");
+
+document.getElementById("intro").addEventListener("click", (e) => {
+  document.getElementById("intro").style.display = "none";
+
+  music.play();
+  type();
+
+  for (let i = 0; i < 20; i++) {
+    const heart = document.createElement("div");
+    heart.className = "boom";
+    heart.innerHTML = "💜";
+    heart.style.left = e.clientX + "px";
+    heart.style.top = e.clientY + "px";
+    heart.style.transform = `translate(${(Math.random()-0.5)*300}px, ${(Math.random()-0.5)*300}px)`;
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 800);
+  }
+});
+
+setInterval(() => {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "💜";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.top = "100vh";
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 2000);
+}, 300);
+</script>
+
+</body>
+</html>
